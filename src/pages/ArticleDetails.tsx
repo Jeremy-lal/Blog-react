@@ -31,10 +31,17 @@ function ArticleDetails() {
         }
     }
 
+    const editArticle = () => {
+        navigate(`/articles/${id}/edit`)
+    }
+
     return (
         <div className="article">
             <button onClick={() => navigate(-1)} title="back"><i className="fa-solid fa-arrow-left"></i></button>
-            <button onClick={deleteArticle} title="delete" className='delete'><i className="fa-solid fa-trash"></i></button>
+            <div className="actions">
+                <button onClick={editArticle} title="edit" className='edit'><i className="fa-solid fa-pen"></i></button>
+                <button onClick={deleteArticle} title="delete" className='delete'><i className="fa-solid fa-trash"></i></button>
+            </div>
             <h1>{article?.title}</h1>
             <p className='date'>{author} | {article?.created_at.toDateString()}</p>
             <img src={article?.image} alt="description" />
