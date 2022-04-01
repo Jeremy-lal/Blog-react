@@ -1,5 +1,6 @@
 import React, { FormEvent, FormEventHandler, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AuthService from '../services/auth.service'
 
 function LoginForm() {
     const [isLogin, setIsLogin] = useState(true)
@@ -14,18 +15,15 @@ function LoginForm() {
     }
 
     const login = () => {
-        console.log('login');
-        if (user) {
-            navigate('/articles')
-        }
-
+        AuthService.signin(user).then(() => {
+            navigate('/profil')
+        })
     }
 
     const signup = () => {
-        console.log('register');
-        if (user) {
-            navigate('/articles')
-        }
+        AuthService.signup(user).then(() => {
+            navigate('/profil')
+        })
     }
 
     return (

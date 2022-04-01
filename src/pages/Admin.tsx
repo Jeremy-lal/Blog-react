@@ -75,7 +75,7 @@ function Admin() {
                             <tr key={article.id}>
                                 <td>{article.id}</td>
                                 <td>{article.title}</td>
-                                <td>{article.created_at.toDateString()}</td>
+                                <td>{article.created_at}</td>
                                 <td><button onClick={() => deleteArticle(article.id)}>Delete</button> <button onClick={() => seeArticle(article.id)}>See</button> </td>
                             </tr>
                         ))
