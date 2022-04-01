@@ -1,13 +1,16 @@
 import ArticleForm from '../components/ArticleForm'
 import { useNavigate } from 'react-router-dom'
 import { Article } from '../models/article'
+import ArticleService from '../services/article.service'
 
 function ArticleNew() {
   const navigate = useNavigate()
 
   const onSubmit = (articleForm: Article) => {
+    ArticleService.postArticle(articleForm).then(() => {
+      navigate('/articles')
+    })
     console.log(articleForm);
-    navigate('/articles')
   }
 
   return (

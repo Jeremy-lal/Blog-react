@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Article } from '../models/article'
-import { articles as ListArticles } from '../data/articles'
 import { users } from '../data/users'
 import { useNavigate, useParams } from 'react-router-dom'
+import ArticleService from '../services/article.service'
 
 function ArticleDetails() {
     const [article, setArticle] = useState<Article>()
@@ -11,23 +11,25 @@ function ArticleDetails() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        setArticle(ListArticles.find(article => article.id === Number(id)))
+        ArticleService.getArticle(Number(id)).then(article => {
+            if (article) {
+                setArticle(article)
+                const author = users.find(user => user.id === article.author_id)
 
-        if (article) {
-            const author = users.find(user => user.id === article.author_id)
-
-            if (author) {
-                setAuthor(author.username)
+                if (author) {
+                    setAuthor(author.username)
+                }
             }
-        }
+        })
     }, [])
 
     const deleteArticle = () => {
         const check = window.confirm('Are you sure you want to delete this article ?')
 
-        if (check) {
-            ListArticles.filter(article => article.id !== Number(id))
-            navigate('/articles')
+        if (check && article?.id) {
+            ArticleService.deleteArticle(article.id).then(() => {
+                navigate('/articles')
+            })
         }
     }
 
@@ -43,7 +45,7 @@ function ArticleDetails() {
                 <button onClick={deleteArticle} title="delete" className='delete'><i className="fa-solid fa-trash"></i></button>
             </div>
             <h1>{article?.title}</h1>
-            <p className='date'>{author} | {article?.created_at.toDateString()}</p>
+            <p className='date'>{author} | {article?.created_at}</p>
             <img src={article?.image} alt="description" />
             <p>{article?.content}</p>
         </div>

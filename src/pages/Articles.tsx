@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { articles as ListArticles } from '../data/articles'
+import { useEffect, useState } from 'react'
 import { Article } from '../models/article'
 import ArticleCard from '../components/ArticleCard'
 import ArticleService from '../services/article.service'

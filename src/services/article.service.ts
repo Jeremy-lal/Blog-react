@@ -3,7 +3,7 @@ import { Article } from "../models/article";
 export default class ArticleService {
 
     static getArticles(): Promise<Article[]> {
-        return fetch('http://localhost:3000/articles')
+        return fetch('http://localhost:3001/articles')
             .then(response => response.json())
             .catch(error => this.handleError(error));
     }
@@ -12,6 +12,12 @@ export default class ArticleService {
         return fetch(`http://localhost:3001/articles/${id}`)
             .then(response => response.json())
             .then(data => this.isEmpty(data) ? null : data)
+            .catch(error => this.handleError(error));
+    }
+
+    static getUserArticles(id: number): Promise<Article[]> {
+        return fetch(`http://localhost:3001/articles/users/${id}`)
+            .then(response => response.json())
             .catch(error => this.handleError(error));
     }
 
@@ -28,7 +34,7 @@ export default class ArticleService {
     }
 
     static updateArticle(article: Article): Promise<Article> {
-        return fetch(`http://localhost:3001/Articles/${article.id}`, {
+        return fetch(`http://localhost:3001/articles/${article.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +46,7 @@ export default class ArticleService {
     }
 
     static deleteArticle(id: number): Promise<Article> {
-        return fetch(`http://localhost:3001/Articles/${id}`, {
+        return fetch(`http://localhost:3001/articles/${id}`, {
             method: 'DELETE'
         })
             .then(response => response.json())
@@ -48,7 +54,7 @@ export default class ArticleService {
     }
 
     static searchArticle(search: string): Promise<Article[]> {
-        return fetch(`http://localhost:3001/Articles?q=${search}`)
+        return fetch(`http://localhost:3001/articles?q=${search}`)
             .then(response => response.json())
             .catch(error => this.handleError(error));
     }

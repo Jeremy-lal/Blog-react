@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { articles as ListArticles } from '../data/articles'
+import { useEffect, useState } from 'react'
 import { Article } from '../models/article'
 import ArticleCard from '../components/ArticleCard'
 import { useNavigate } from 'react-router-dom'
+import ArticleService from '../services/article.service'
 
 function Profil() {
     const [articles, setArticles] = useState<Article[]>()
     const navigate = useNavigate()
 
     useEffect(() => {
-        setArticles(ListArticles)
+        ArticleService.getUserArticles(1).then(articles => {
+            setArticles(articles)
+        })
     }, [])
 
     const deleteAccoutn = () => {
