@@ -7,7 +7,7 @@ export const articles: Article[] = [
         title: 'Article 1',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lorem est, imperdiet quis arcu sit amet, commodo fermentum quam. Sed euismod quam eu augue imperdiet, vel ultricies ante elementum. Nam mollis ultricies eleifend. Nam tristique metus eu neque condimentum, quis laoreet mi interdum. In vel augue erat. Suspendisse interdum blandit diam quis pharetra. Donec tincidunt pulvinar faucibus. Nam fermentum varius augue sit amet accumsan. Aliquam luctus sem et dignissim ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
         created_at: new Date(),
-        author: 'John Doe'
+        author_id: 1
     },
     {
         id: 2,
@@ -15,7 +15,7 @@ export const articles: Article[] = [
         title: 'Article 2',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lorem est, imperdiet quis arcu sit amet, commodo fermentum quam. Sed euismod quam eu augue imperdiet, vel ultricies ante elementum. Nam mollis ultricies eleifend. Nam tristique metus eu neque condimentum, quis laoreet mi interdum. In vel augue erat. Suspendisse interdum blandit diam quis pharetra. Donec tincidunt pulvinar faucibus. Nam fermentum varius augue sit amet accumsan. Aliquam luctus sem et dignissim ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
         created_at: new Date(),
-        author: 'John Doe'
+        author_id: 1
     },
     {
         id: 3,
@@ -23,7 +23,7 @@ export const articles: Article[] = [
         title: 'Article 3',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lorem est, imperdiet quis arcu sit amet, commodo fermentum quam. Sed euismod quam eu augue imperdiet, vel ultricies ante elementum. Nam mollis ultricies eleifend. Nam tristique metus eu neque condimentum, quis laoreet mi interdum. In vel augue erat. Suspendisse interdum blandit diam quis pharetra. Donec tincidunt pulvinar faucibus. Nam fermentum varius augue sit amet accumsan. Aliquam luctus sem et dignissim ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
         created_at: new Date(),
-        author: 'John Doe'
+        author_id: 1
     },
     {
         id: 4,
@@ -31,7 +31,7 @@ export const articles: Article[] = [
         title: 'Article 4',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lorem est, imperdiet quis arcu sit amet, commodo fermentum quam. Sed euismod quam eu augue imperdiet, vel ultricies ante elementum. Nam mollis ultricies eleifend. Nam tristique metus eu neque condimentum, quis laoreet mi interdum. In vel augue erat. Suspendisse interdum blandit diam quis pharetra. Donec tincidunt pulvinar faucibus. Nam fermentum varius augue sit amet accumsan. Aliquam luctus sem et dignissim ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
         created_at: new Date(),
-        author: 'John Doe'
+        author_id: 1
     },
     {
         id: 5,
@@ -39,6 +39,6 @@ export const articles: Article[] = [
         title: 'Article 5',
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lorem est, imperdiet quis arcu sit amet, commodo fermentum quam. Sed euismod quam eu augue imperdiet, vel ultricies ante elementum. Nam mollis ultricies eleifend. Nam tristique metus eu neque condimentum, quis laoreet mi interdum. In vel augue erat. Suspendisse interdum blandit diam quis pharetra. Donec tincidunt pulvinar faucibus. Nam fermentum varius augue sit amet accumsan. Aliquam luctus sem et dignissim ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
         created_at: new Date(),
-        author: 'John Doe'
+        author_id: 1
     },
 ]

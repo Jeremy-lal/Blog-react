@@ -14,6 +14,7 @@ h1 {
   text-align: center;
 }
 
+/* nav */
 nav {
   background-color: black;
   border-bottom: 1px solid #e5e5e5;
@@ -38,6 +39,8 @@ nav i {
 nav a.active {
   border-bottom: 2px solid white;
 }
+
+/* article card */
 
 .articles {
   display: flex;
@@ -95,6 +98,7 @@ div.desc {
   clear: both;
 }
 
+/* article details */
 .article {
   width: 90%;
   margin: 0 auto;
@@ -120,6 +124,17 @@ div.desc {
   font-size: 1.5rem;
   cursor: pointer;
 }
+.article .delete {
+  background: red;
+  padding: 0.5rem;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  position: fixed;
+  right: 30px;
+}
+
+/* login */
 
 .login-form {
   max-width: 500px;
@@ -170,4 +185,40 @@ div.desc {
   text-transform: capitalize;
   margin: auto;
   display: block;
+}
+
+/* admin */
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+table caption {
+  margin-bottom: 15px;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
 }

@@ -4,5 +4,5 @@ export class Article {
     title!: string;
     content!: string;
     created_at!: Date;
-    author!: string;
+    author_id!: number;
 }

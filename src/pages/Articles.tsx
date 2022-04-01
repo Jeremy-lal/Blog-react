@@ -4,7 +4,7 @@ import { Article } from '../models/article'
 import ArticleCard from '../components/ArticleCard'
 
 function Articles() {
-    const [articles, setArticles] = React.useState<Article[]>()
+    const [articles, setArticles] = useState<Article[]>()
 
     useEffect(() => {
         setArticles(ListArticles)
