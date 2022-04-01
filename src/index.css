@@ -302,3 +302,13 @@ table th {
 .profil-page h2 i {
   cursor: pointer;
 }
+
+.profil-page .delete {
+  background: red;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  margin-left: 5%;
+  cursor: pointer;
+}

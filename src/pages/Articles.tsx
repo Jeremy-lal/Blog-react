@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { articles as ListArticles } from '../data/articles'
 import { Article } from '../models/article'
 import ArticleCard from '../components/ArticleCard'
+import ArticleService from '../services/article.service'
 
 function Articles() {
     const [articles, setArticles] = useState<Article[]>()
 
     useEffect(() => {
-        setArticles(ListArticles)
+        ArticleService.getArticles().then(articles => {
+            setArticles(articles)
+        })
     }, [])
 
     return (
