@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { users as ListUsers } from '../data/users'
+import { useState, useEffect } from 'react'
 import { Article } from '../models/article'
 import { User } from '../models/user'
 import { useNavigate } from 'react-router-dom'
 import ArticleService from '../services/article.service'
+import UserService from '../services/user.service'
 
 function Admin() {
     const [articles, setArticles] = useState<Article[]>()
@@ -11,11 +11,21 @@ function Admin() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        getArticles()
+        getUsers()
+    }, [])
+
+    const getUsers = () => {
+        UserService.getUsers().then(users => {
+            setUsers(users)
+        })
+    }
+
+    const getArticles = () => {
         ArticleService.getArticles().then(articles => {
             setArticles(articles)
         })
-        setUsers(ListUsers)
-    }, [])
+    }
 
     const seeArticle = (id?: number) => {
         if (id) {
@@ -28,6 +38,7 @@ function Admin() {
 
         if (check && id) {
             ArticleService.deleteArticle(id).then(() => {
+                getArticles()
             })
         }
     }
@@ -35,8 +46,10 @@ function Admin() {
     const deleteUser = (id?: number) => {
         const check = window.confirm('Are you sure you want to delete this user ?')
 
-        if (check) {
-            ListUsers.filter(user => user.id !== id)
+        if (check && id) {
+            UserService.deleteUser(id).then(() => {
+                getUsers()
+            })
         }
     }
 

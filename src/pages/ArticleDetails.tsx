@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Article } from '../models/article'
-import { users } from '../data/users'
 import { useNavigate, useParams } from 'react-router-dom'
 import ArticleService from '../services/article.service'
+import { formatDate } from '../utilities/date-format'
 
 function ArticleDetails() {
     const [article, setArticle] = useState<Article>()
@@ -14,11 +14,6 @@ function ArticleDetails() {
         ArticleService.getArticle(Number(id)).then(article => {
             if (article) {
                 setArticle(article)
-                const author = users.find(user => user.id === article.author_id)
-
-                if (author) {
-                    setAuthor(author.username)
-                }
             }
         })
     }, [])
@@ -45,7 +40,7 @@ function ArticleDetails() {
                 <button onClick={deleteArticle} title="delete" className='delete'><i className="fa-solid fa-trash"></i></button>
             </div>
             <h1>{article?.title}</h1>
-            <p className='date'>{author} | {article?.created_at}</p>
+            <p className='date'>{author} | {formatDate(article?.created_at)}</p>
             <img src={article?.image} alt="description" />
             <p>{article?.content}</p>
         </div>
