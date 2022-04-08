@@ -1,23 +1,66 @@
-import React, { FormEvent, FormEventHandler, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { FormEvent, useState } from 'react'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 import AuthService from '../services/auth.service'
 
 function LoginForm() {
+    const { setAuth } = useAuth() as any
     const [isLogin, setIsLogin] = useState(true)
     const [user, setUser] = useState({ username: '', password: '' })
+    const [errorMessage, setErrorMessage] = useState('')
 
     const navigate = useNavigate()
+    const location = useLocation() as any
+    const from = location.state?.from.pathname || '/articles'
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault()
-        console.log(user);
         isLogin ? login() : signup()
+
     }
 
-    const login = () => {
-        AuthService.signin(user).then(() => {
-            navigate('/profil')
-        })
+    const login = async () => {
+        try {
+            const response = await AuthService.signin(user)
+            console.log(response);
+            const accessToken = response.data.token
+            const role = response.data.role
+            setAuth({ username: user.username, id: response.data.id, accessToken, role })
+            setUser({ username: '', password: '' })
+            setErrorMessage('')
+            navigate(from, { replace: true })
+
+        } catch (err) {
+            if (!(err as any)?.response) {
+                setErrorMessage('No Server Response');
+            } else if ((err as any).response?.status === 403) {
+                setErrorMessage('Username or password incorrect');
+            } else {
+                setErrorMessage('Login Failed');
+            }
+
+
+        }
+
+        // AuthService.signin(user) 
+        //     .then((result) => {
+        //         console.log(result);
+
+        //         if (result.statusCode === 403) {
+        //             setErrorMessage('Username or password incorrect')
+        //             return
+        //         }
+
+        //         const accessToken = result.token
+        //         const role = result.role
+        //         setAuth({ ...user, accessToken, role })
+        //         setUser({ username: '', password: '' })
+        //         setErrorMessage('')
+        //         navigate(from, { replace: true })
+        //     })
+        //     .catch((err) => {
+        //         setErrorMessage('No response from server')
+        //     })
     }
 
     const signup = () => {
@@ -36,11 +79,18 @@ function LoginForm() {
             }
             <label>
                 <input type="text" name="username" placeholder='Username' value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} />
+                {/* <div className="message_error">
+                    error
+                </div> */}
             </label>
             <label>
                 <input type="password" name="password" placeholder='Password' value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                <div className="error">
+
+                </div>
             </label>
-            <button>{isLogin ? 'Login' : 'Register'}</button>
+            <button disabled={user.password === '' || user.username === ''}>{isLogin ? 'Login' : 'Register'}</button>
+            {errorMessage !== '' && <p className="message_error">{errorMessage}</p>}
 
         </form>
 

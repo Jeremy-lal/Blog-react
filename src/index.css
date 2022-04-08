@@ -21,6 +21,9 @@ h1 {
   cursor: pointer;
 }
 
+.message_error {
+  color: rgba(255, 0, 0, 0.8);
+}
 /* nav */
 nav {
   background-color: black;
@@ -45,6 +48,11 @@ nav i {
 
 nav a.active {
   border-bottom: 2px solid white;
+}
+
+.fa-power-off {
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 /* article card */
@@ -166,6 +174,11 @@ div.desc {
   font-weight: 600;
 }
 
+.login-form label {
+  margin-bottom: 20px;
+  display: block;
+}
+
 .login-form input {
   font-family: inherit;
   font-size: 1rem;
@@ -181,7 +194,6 @@ div.desc {
   background: #f1f5f9;
   text-transform: unset;
   text-rendering: optimizeLegibility;
-  margin-bottom: 20px;
 }
 
 .login-form button {
@@ -202,6 +214,10 @@ div.desc {
   text-transform: capitalize;
   margin: auto;
   display: block;
+}
+
+.login-form button:disabled {
+  opacity: 0.5;
 }
 
 /* admin */

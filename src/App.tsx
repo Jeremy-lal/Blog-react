@@ -9,6 +9,7 @@ import ArticleDetails from './pages/ArticleDetails';
 import NavBar from './components/NavBar';
 import ArticleNew from './pages/ArticleNew';
 import ArticleEdit from './pages/ArticleEdit';
+import RequireAuth from './components/RequireAuth';
 
 function App() {
   return (
@@ -16,13 +17,21 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Navigate to="/articles" />}></Route>
-        <Route path="/articles" element={<Articles />}></Route>
-        <Route path="/articles/new" element={<ArticleNew />}></Route>
-        <Route path="/articles/:id" element={<ArticleDetails />}></Route>
-        <Route path="/articles/:id/edit" element={<ArticleEdit />}></Route>
-        <Route path="/profil" element={<Profil />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/articles" element={<Articles />}></Route>
+        <Route path="/articles/:id" element={<ArticleDetails />}></Route>
+
+        {/* peotected routes user*/}
+        <Route element={<RequireAuth allowedRoles={['user', 'admin']} />}>
+          <Route path="/articles/new" element={<ArticleNew />}></Route>
+          <Route path="/articles/:id/edit" element={<ArticleEdit />}></Route>
+          <Route path="/profil" element={<Profil />}></Route>
+        </Route>
+
+        {/* peotected routes admin*/}
+        <Route element={<RequireAuth allowedRoles={['admin']} />}>
+          <Route path="/admin" element={<Admin />}></Route>
+        </Route>
       </Routes>
     </>
   );

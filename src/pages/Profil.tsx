@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Article } from '../models/article'
 import ArticleCard from '../components/ArticleCard'
 import { useNavigate } from 'react-router-dom'
 import ArticleService from '../services/article.service'
+import AuthContext from '../context/AuthProvider'
 
 function Profil() {
     const [articles, setArticles] = useState<Article[]>()
     const navigate = useNavigate()
+    const { auth } = useContext(AuthContext) as any
 
     useEffect(() => {
-        ArticleService.getUserArticles(1).then(articles => {
+        ArticleService.getUserArticles(auth.id).then(articles => {
             setArticles(articles)
         })
     }, [])

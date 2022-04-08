@@ -1,24 +1,41 @@
 import { useState, useEffect } from 'react'
 import { Article } from '../models/article'
 import { User } from '../models/user'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import ArticleService from '../services/article.service'
 import UserService from '../services/user.service'
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
 
 function Admin() {
     const [articles, setArticles] = useState<Article[]>()
     const [users, setUsers] = useState<User[]>()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const controller = new AbortController();
+
+    const axiosPrivate = useAxiosPrivate()
 
     useEffect(() => {
         getArticles()
         getUsers()
+
+        return () => {
+            controller.abort()
+        }
     }, [])
 
-    const getUsers = () => {
-        UserService.getUsers().then(users => {
-            setUsers(users)
-        })
+    const getUsers = async () => {
+        try {
+            const response = await axiosPrivate.get('/users', { signal: controller.signal, withCredentials: true })
+            if (response.data) {
+                setUsers(response.data)
+            }
+
+        } catch (error) {
+            console.log(error)
+            navigate('/login', { state: { from: location }, replace: true })
+        }
     }
 
     const getArticles = () => {
@@ -58,9 +75,11 @@ function Admin() {
             <table>
                 <caption>List of all the users</caption>
                 <thead>
-                    <th>Id</th>
-                    <th>User</th>
-                    <th>Action</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>User</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
@@ -77,10 +96,12 @@ function Admin() {
             <table>
                 <caption>List of all the articles</caption>
                 <thead>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Created</th>
-                    <th>Action</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Created</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                     {
